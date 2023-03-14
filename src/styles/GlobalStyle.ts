@@ -8,6 +8,9 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         border: 0;
     }
+    button {
+        background: transparent;
+    }
 `;
 
 export default GlobalStyle;
