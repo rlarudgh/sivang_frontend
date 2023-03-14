@@ -5,7 +5,10 @@ import Button from "../button";
 const Header = () => {
   return (
     <_Wrapper>
-      <img src={Logo} alt="Logo Image" />
+      <_LogoWrapper>
+        <img src={Logo} alt="Logo Image" />
+        <_LogoText>SIVANG</_LogoText>
+      </_LogoWrapper>
       <_UpperWrapper>
         <_Text>자동 기록 추가</_Text>
         <_Text>돈 기록하기</_Text>
@@ -44,4 +47,16 @@ const _Text = styled.span`
   :hover {
     text-decoration: underline;
   }
+`;
+
+const _LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const _LogoText = styled.span`
+  ${({ theme }) => theme.font.title1};
+  color: ${({ theme }) => theme.color.main02};
+  text-align: center;
+  margin-left: 5px;
 `;
