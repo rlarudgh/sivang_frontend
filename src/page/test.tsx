@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../components/common/button";
 import Input from "../components/common/input";
+import Header from "../components/common/header/index";
 
 const Test = () => {
   const [state, setState] = useState<number>(0);
@@ -14,15 +15,7 @@ const Test = () => {
 
   return (
     <>
-      <Button onClick={onClick} color="main01">
-        {state}
-      </Button>
-      <Input
-        text="아이디"
-        placeholder="아이디를 입력해주세요."
-        onChange={onChange}
-        value={value}
-      />
+      <Header />
     </>
   );
 };
