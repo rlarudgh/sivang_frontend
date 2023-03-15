@@ -1,46 +1,30 @@
-name: node.js CI
+name: CI
 
 on:
   push:
     branches:
-      - "feature/**"
-      - "hotfixes"
-      - "release/**"
-      - "main"
-      - "develop"
+      - main
   pull_request:
     branches:
-      - "main"
-      - "develop"
-      - "release/**"
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+      - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16]
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          node-version: "16"
 
-      - name: Generate Environment Variables File for Production
-        env:
-          REACT_APP_DOMAIN: ${{ secrets.your_key }}
-        run: |
-          echo "your_key=$your_key" >> .env
+      - name: Install dependencies
+        run: npm install
 
-      - name: Install Dependencies
-        run: yarn --immutable --immutable-cache --check-cache
+      - name: Build
+        run: npm run build
 
-      - name: Build Packages
-        run: yarn build
+      - name: Test
+        run: npm test
