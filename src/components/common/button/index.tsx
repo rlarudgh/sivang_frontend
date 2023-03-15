@@ -11,7 +11,7 @@ interface PropsType {
 const Button = ({ children, color, onClick }: PropsType) => {
   return (
     <_Wrapper onClick={onClick} buttonColor={color}>
-      <span>{children}</span>
+      {children}
     </_Wrapper>
   );
 };
@@ -19,14 +19,15 @@ const Button = ({ children, color, onClick }: PropsType) => {
 export default Button;
 
 const _Wrapper = styled.button<{ buttonColor: keyOfColorType }>`
+  width: max-content;
   padding: 13px 64px;
   border-radius: 8px;
   border: 1px solid ${({ buttonColor }) => color[buttonColor]};
   color: ${({ buttonColor }) => color[buttonColor]};
   font-size: 20px;
-  font-weight: bold;
-  flex: none;
-  font-family: "Inter";
+  font-weight: 600;
+  gap: 10px;
+  font-family: "Noto Sans";
   cursor: pointer;
   :hover {
     color: ${({ theme }) => theme.color.gray100};
