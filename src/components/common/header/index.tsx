@@ -12,6 +12,7 @@ const Header = () => {
       <_UpperWrapper>
         <_Text>자동 기록 추가</_Text>
         <_Text>돈 기록하기</_Text>
+        <_Text>마이페이지</_Text>
       </_UpperWrapper>
       <Button color="main02">로그아웃</Button>
     </_Wrapper>
@@ -27,6 +28,8 @@ const _Wrapper = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: fixed;
+  z-index: 2;
   @media screen and (max-width: 900px) {
     background-color: ${({ theme }) => theme.color.main04};
     height: 100vh;
