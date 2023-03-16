@@ -20,6 +20,7 @@ export default Button;
 
 const _Wrapper = styled.button<{ buttonColor: keyOfColorType }>`
   width: max-content;
+  height: max-content;
   padding: 13px 64px;
   border-radius: 8px;
   border: 1px solid ${({ buttonColor }) => color[buttonColor]};
