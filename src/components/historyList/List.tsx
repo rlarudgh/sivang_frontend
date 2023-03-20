@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { TransactionType } from "../../types/transaction";
-import { useState, useEffect } from "react";
 import { Plus, Minus, Garbage } from "../../assets";
+import { useModal } from "../../hooks/useModal";
 
 interface PropsType {
   transaction: TransactionType;
@@ -9,8 +9,10 @@ interface PropsType {
 }
 
 const List = ({ transaction, type }: PropsType) => {
+  const { openModal } = useModal();
+
   return (
-    <_Wrapper type={type}>
+    <_Wrapper type={type} onClick={openModal}>
       <_LeftWrapper>
         <img src={type === "+" ? Plus : Minus} alt={type} />
         <_Text>{transaction.description}</_Text>
@@ -39,6 +41,28 @@ const _Wrapper = styled.div<{ type: "+" | "-" }>`
   margin-bottom: 20px;
   color: ${({ theme, type }) =>
     type === "+" ? theme.color.focus : theme.color.main01};
+  cursor: pointer;
+  @keyframes sizeUp {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+  @keyframes sizeDown {
+    0% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  animation: sizeDown 0.4s;
+  :hover {
+    animation: sizeUp 0.4s;
+    animation-fill-mode: forwards;
+  }
 `;
 
 const _Text = styled.span`
