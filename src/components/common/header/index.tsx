@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import { Logo } from "../../../assets";
 import Button from "../button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  const onClick = () => {
+    window.location.href = "/main";
+  };
+
   return (
     <_Wrapper>
-      <_LogoWrapper>
+      <_LogoWrapper onClick={onClick}>
         <img src={Logo} alt="Logo Image" />
         <_LogoText>SIVANG</_LogoText>
       </_LogoWrapper>
       <_UpperWrapper>
-        <_Text>자동 기록 추가</_Text>
-        <_Text>돈 기록하기</_Text>
-        <_Text>마이페이지</_Text>
+        <_Text to="/">규칙 기록</_Text>
+        <_Text to="/">마이페이지</_Text>
       </_UpperWrapper>
       <Button color="main02">로그아웃</Button>
     </_Wrapper>
@@ -24,12 +28,13 @@ export default Header;
 const _Wrapper = styled.header`
   width: 100vw;
   height: 80px;
-  background-color: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.white};
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: fixed;
   z-index: 2;
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray300};
   @media screen and (max-width: 900px) {
     background-color: ${({ theme }) => theme.color.main04};
     height: 100vh;
@@ -42,7 +47,7 @@ const _UpperWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const _Text = styled.span`
+const _Text = styled(Link)`
   cursor: pointer;
   color: ${({ theme }) => theme.color.black};
   text-decoration: none;
@@ -55,6 +60,7 @@ const _Text = styled.span`
 const _LogoWrapper = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const _LogoText = styled.span`
