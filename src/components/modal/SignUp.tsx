@@ -4,12 +4,9 @@ import Button from "../common/button";
 import { useState } from "react";
 import { SignUpType } from "../../types/signUp";
 import { customToast } from "../../utils/toast";
+import { ModalType } from "../../types/modal";
 
-interface PropsType {
-  setModal: (modal: boolean) => void;
-}
-
-const SignUpModal = ({ setModal }: PropsType) => {
+const SignUpModal = ({ setModal }: ModalType) => {
   const [data, setData] = useState<SignUpType>({
     name: "",
     email: "",

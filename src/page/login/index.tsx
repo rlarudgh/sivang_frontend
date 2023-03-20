@@ -4,7 +4,7 @@ import { Logo, LoginImage } from "../../assets";
 import { LoginType } from "../../types/login";
 import Input from "../../components/common/input";
 import Button from "../../components/common/button";
-import SignUpModal from "../../components/modal";
+import SignUpModal from "../../components/modal/SignUp";
 
 const LoginPage = () => {
   const [information, setInformation] = useState<LoginType>({
