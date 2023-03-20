@@ -4,11 +4,16 @@ import { MainBackground } from "../../assets";
 import Button from "../../components/common/button";
 import HistoryList from "../../components/historyList";
 import { TransactionDummy } from "../../constance/purchase";
+import { useRecoilValue } from "recoil";
+import { modalState } from "../../utils/atom";
+import DetailModal from '../../components/modal/Detail';
 
 const MainPage = () => {
+  const modal = useRecoilValue(modalState);
   const onClick = () => {
     console.log("hello world");
   };
+
   return (
     <_Wrapper>
       <Header />
@@ -30,6 +35,7 @@ const MainPage = () => {
         <HistoryList transaction={TransactionDummy} type={"+"} />
         <HistoryList transaction={TransactionDummy} type={"-"} />
       </_HistoryWrapper>
+      {modal && <DetailModal />}
     </_Wrapper>
   );
 };
@@ -52,7 +58,6 @@ const _ItemWrapper = styled.div`
     url(${MainBackground});
   background-position: center;
   z-index: 1;
-  margin-top: 80px;
 `;
 
 const _IntroduceWrapper = styled.div`
@@ -74,6 +79,6 @@ const _TextWrapper = styled.div`
 const _HistoryWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   margin: 60px 0;
 `;
