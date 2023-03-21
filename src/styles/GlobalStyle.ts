@@ -11,6 +11,12 @@ const GlobalStyle = createGlobalStyle`
     button {
         background: transparent;
     }
+    input{
+        background: transparent;
+    }
+    textarea{
+        background: transparent;
+    }
 `;
 
 export default GlobalStyle;
