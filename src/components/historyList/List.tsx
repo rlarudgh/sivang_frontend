@@ -11,15 +11,19 @@ interface PropsType {
 const List = ({ transaction, type }: PropsType) => {
   const { openModal } = useModal();
 
+  const onClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
+  };
+
   return (
     <_Wrapper type={type} onClick={openModal}>
       <_LeftWrapper>
-        <img src={type === "+" ? Plus : Minus} alt={type} />
+        <img onClick={onClick} src={type === "+" ? Plus : Minus} alt={type} />
         <_Text>{transaction.description}</_Text>
       </_LeftWrapper>
       <_RightWrapper>
         <_PriceText>{transaction.price}원</_PriceText>
-        <_GarbageImage src={Garbage} alt="Garbage" />
+        <_GarbageImage onClick={onClick} src={Garbage} alt="Garbage" />
       </_RightWrapper>
     </_Wrapper>
   );
