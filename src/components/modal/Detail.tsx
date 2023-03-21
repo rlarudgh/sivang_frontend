@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useModal } from "../../hooks/useModal";
 import Button from "../common/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CheckItem from "./Check";
 import ModifyItem from "./Modify";
 
@@ -12,6 +12,20 @@ const DetailModal = () => {
   const onClick = () => {
     setModify(true);
   };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      closeModal();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeModal]);
 
   return (
     <_Wrapper onClick={closeModal}>
