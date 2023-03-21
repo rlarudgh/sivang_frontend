@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import { useModal } from "../../hooks/useModal";
-import { Minus } from "../../assets";
 import Button from "../common/button";
-import { PaymentDummy } from "../../constance/payment";
+import { useState } from "react";
+import CheckItem from "./Check";
+import ModifyItem from "./Modify";
 
 const DetailModal = () => {
-  const { closeModal } = useModal();
+  const { closeModal }: { closeModal: () => void } = useModal();
+  const [modify, setModify] = useState<boolean>(false);
+
+  const onClick = () => {
+    setModify(true);
+  };
 
   return (
     <_Wrapper onClick={closeModal}>
@@ -15,24 +21,16 @@ const DetailModal = () => {
         }
       >
         <_ItemWrapper>
-          <div>
-            <_InnerWrapper>
-              <_Image src={Minus} alt="type" onClick={closeModal} />
-              <_Title>{PaymentDummy.title}</_Title>
-            </_InnerWrapper>
-            <_Bar />
-          </div>
-          <div>
-            <_InnerTitle>사유</_InnerTitle>
-            <_Text>{PaymentDummy.content}</_Text>
-          </div>
-          <div>
-            <_InnerTitle>비용</_InnerTitle>
-            <_Text>{PaymentDummy.cost}원</_Text>
-          </div>
+          {modify ? <ModifyItem /> : <CheckItem />}
           <_ButtonWrapper>
-            <Button color="main02">수정</Button>
-            <Button color="main01">확인</Button>
+            {!modify && (
+              <Button onClick={onClick} color="main02">
+                수정
+              </Button>
+            )}
+            <Button onClick={closeModal} color="main01">
+              확인
+            </Button>
           </_ButtonWrapper>
         </_ItemWrapper>
       </_Modal>
@@ -70,40 +68,6 @@ const _ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-`;
-
-const _InnerWrapper = styled.div`
-  width: 100%;
-  display: flex;
-`;
-
-const _Image = styled.img`
-  width: 20px;
-  margin-right: 20px;
-  cursor: pointer;
-`;
-
-const _Title = styled.span`
-  ${({ theme }) => theme.font.body3};
-  color: ${({ theme }) => theme.color.main01};
-`;
-
-const _Bar = styled.hr`
-  width: 250px;
-  height: 1px;
-  border: 1px solid ${({ theme }) => theme.color.main01};
-  margin-top: 20px;
-`;
-
-const _InnerTitle = styled.p`
-  ${({ theme }) => theme.font.body3};
-`;
-
-const _Text = styled.span`
-  width: 100%;
-  ${({ theme }) => theme.font.body6};
-  color: ${({ theme }) => theme.color.black};
-  line-height: 48px;
 `;
 
 const _ButtonWrapper = styled.div`
