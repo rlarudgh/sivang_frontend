@@ -34,6 +34,9 @@ const _TextArea = styled.textarea`
   border-radius: 8px;
   resize: none;
   ${({ theme }) => theme.font.body4};
+  ::placeholder {
+    color: ${({ theme }) => theme.color.gray400};
+  }
 `;
 
 const _Text = styled.p`
