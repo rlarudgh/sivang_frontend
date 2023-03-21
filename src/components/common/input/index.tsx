@@ -24,6 +24,7 @@ const Input = ({
 }: PropsType) => {
   const [clickState, setClickState] = useState<boolean>(false);
   const ref = useRef<HTMLInputElement>(null);
+
   return (
     <_Wrapper>
       <_UpperText>{text}</_UpperText>
