@@ -240,6 +240,7 @@ const _Text = styled.span`
 
 const _ButtonWrapper = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 const _ReasonWrapper = styled.div`
