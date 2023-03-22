@@ -1,17 +1,17 @@
-import Header from "../../components/common/header";
-import styled from "styled-components";
-import { MainBackground } from "../../assets";
-import Button from "../../components/common/button";
-import HistoryList from "../../components/historyList";
-import { TransactionDummy } from "../../constance/purchase";
-import { useRecoilValue } from "recoil";
-import { modalState } from "../../utils/atom";
+import Header from '../../components/common/header';
+import styled from 'styled-components';
+import { MainBackground } from '../../assets';
+import Button from '../../components/common/button';
+import HistoryList from '../../components/historyList';
+import { TransactionDummy } from '../../constance/purchase';
+import { useRecoilValue } from 'recoil';
+import { modalState } from '../../utils/atom';
 import DetailModal from '../../components/modal/Detail';
 
 const MainPage = () => {
   const modal = useRecoilValue(modalState);
   const onClick = () => {
-    console.log("hello world");
+    window.location.href = '/write';
   };
 
   return (
@@ -32,8 +32,8 @@ const MainPage = () => {
         </_IntroduceWrapper>
       </_ItemWrapper>
       <_HistoryWrapper>
-        <HistoryList transaction={TransactionDummy} type={"+"} />
-        <HistoryList transaction={TransactionDummy} type={"-"} />
+        <HistoryList transaction={TransactionDummy} type={'+'} />
+        <HistoryList transaction={TransactionDummy} type={'-'} />
       </_HistoryWrapper>
       {modal && <DetailModal />}
     </_Wrapper>
@@ -54,8 +54,7 @@ const _ItemWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(${MainBackground});
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${MainBackground});
   background-position: center;
   z-index: 1;
 `;
