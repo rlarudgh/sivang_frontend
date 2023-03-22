@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "./page/login";
 import MainPage from "./page/main";
 import WritePage from "./page/write";
-import CyclePage from "./page/cycle";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient({
@@ -31,7 +30,6 @@ const App = () => {
               <Route path="/" element={<LoginPage />} />
               <Route path="/main" element={<MainPage />} />
               <Route path="/write" element={<WritePage />} />
-              <Route path="/cycle" element={<CyclePage />} />
             </Routes>
           </BrowserRouter>
         </RecoilRoot>
