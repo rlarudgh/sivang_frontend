@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { Logo } from "../../../assets";
-import Button from "../button";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Logo } from '../../../assets';
+import Button from '../button';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const onClick = () => {
-    window.location.href = "/main";
+    window.location.href = '/main';
   };
 
   return (
@@ -15,8 +15,8 @@ const Header = () => {
         <_LogoText>SIVANG</_LogoText>
       </_LogoWrapper>
       <_UpperWrapper>
-        <_Text to="/">규칙 기록</_Text>
-        <_Text to="/">마이페이지</_Text>
+        <_Text to="/regular">규칙적인 기록</_Text>
+        <_Text to="/mypage">마이페이지</_Text>
       </_UpperWrapper>
       <Button color="main02">로그아웃</Button>
     </_Wrapper>
