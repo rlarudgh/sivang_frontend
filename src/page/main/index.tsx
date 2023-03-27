@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { MainBackground } from '../../assets';
 import Button from '../../components/common/button';
 import HistoryList from '../../components/historyList';
-import { TransactionDummy } from '../../constance/purchase';
+import { TransactionDummy } from '../../constants/purchase';
 import { useRecoilValue } from 'recoil';
 import { modalState } from '../../utils/atom';
 import DetailModal from '../../components/modal/Detail';
@@ -23,8 +23,8 @@ const MainPage = () => {
             <p>
               이번 달 <strong>김경호</strong>님이
             </p>
-            <strong>수입/지출 합친 돈은 </strong>
-            <strong>1000원입니다.</strong>
+            <_Strong>수입/지출 합친 돈은 </_Strong>
+            <_Strong>1000원입니다.</_Strong>
           </_TextWrapper>
           <Button onClick={onClick} color="main03">
             기록 작성
@@ -80,4 +80,8 @@ const _HistoryWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 60px 0;
+`;
+
+const _Strong = styled.strong`
+  ${({ theme }) => theme.font.title3};
 `;
