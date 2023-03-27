@@ -23,7 +23,7 @@ const MainPage = () => {
             <p>
               이번 달 <strong>김경호</strong>님이
             </p>
-            <_Strong>수입/지출 합친 돈은 </_Strong>
+            <_Strong>총 수입 & 지출한 돈은 </_Strong>
             <_Strong>1000원입니다.</_Strong>
           </_TextWrapper>
           <Button onClick={onClick} color="main03">
