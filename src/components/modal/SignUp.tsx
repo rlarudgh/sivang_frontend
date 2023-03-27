@@ -1,29 +1,27 @@
-import styled from "styled-components";
-import Input from "../common/input";
-import Button from "../common/button";
-import { useState } from "react";
-import { SignUpType } from "../../types/signUp";
-import { customToast } from "../../utils/toast";
-import { ModalType } from "../../types/modal";
+import styled from 'styled-components';
+import Input from '../common/input';
+import Button from '../common/button';
+import { useState } from 'react';
+import { SignUpType } from '../../types/signUp';
+import { customToast } from '../../utils/toast';
+import { ModalType } from '../../types/modal';
+import { useModal } from '../../hooks/useModal';
 
-const SignUpModal = ({ setModal }: ModalType) => {
+const SignUpModal = () => {
+  const { closeModal } = useModal();
   const [data, setData] = useState<SignUpType>({
-    name: "",
-    email: "",
-    password: "",
-    reTypingPassword: "",
+    name: '',
+    email: '',
+    password: '',
+    reTypingPassword: '',
   });
 
-  const onClickBackground = () => {
-    setModal(false);
-  };
-
   const onClickSignUp = () => {
-    const regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}"); // email 정규식
+    const regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}'); // email 정규식
     if (!regex.test(data.email)) {
-      customToast("이메일을 확인해주세요.", "error");
+      customToast('이메일을 확인해주세요.', 'error');
     } else if (data.password !== data.reTypingPassword) {
-      customToast("비밀번호를 확인해주세요.", "error");
+      customToast('비밀번호를 확인해주세요.', 'error');
     }
     // 서버 호출
   };
@@ -37,23 +35,12 @@ const SignUpModal = ({ setModal }: ModalType) => {
   };
 
   return (
-    <_Wrapper onClick={onClickBackground}>
-      <_SignUpModal
-        onClick={(e: React.MouseEvent<HTMLDivElement | MouseEvent>) =>
-          e.stopPropagation()
-        }
-      >
+    <_Wrapper onClick={closeModal}>
+      <_SignUpModal onClick={(e: React.MouseEvent<HTMLDivElement | MouseEvent>) => e.stopPropagation()}>
         <_Title>
           <_LogoText>SIVANG</_LogoText> 회원가입
         </_Title>
-        <Input
-          type="text"
-          placeholder="홍길동"
-          onChange={onChange}
-          value={data.name}
-          name="name"
-          text="이름"
-        />
+        <Input type="text" placeholder="홍길동" onChange={onChange} value={data.name} name="name" text="이름" />
         <Input
           type="text"
           placeholder="test1234@gmail.com"

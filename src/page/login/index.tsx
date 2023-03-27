@@ -5,21 +5,21 @@ import { LoginType } from "../../types/login";
 import Input from "../../components/common/input";
 import Button from "../../components/common/button";
 import SignUpModal from "../../components/modal/SignUp";
+import { useModal } from '../../hooks/useModal';
+import { useRecoilValue } from "recoil";
+import { modalState } from "../../utils/atom";
 
 const LoginPage = () => {
   const [information, setInformation] = useState<LoginType>({
     id: "",
     password: "",
   });
-  const [modal, setModal] = useState<boolean>(false);
+  const { openModal, closeModal } = useModal();
+  const modal = useRecoilValue(modalState);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInformation({ ...information, [name]: value });
-  };
-
-  const onClick = () => {
-    setModal(true);
   };
 
   return (
@@ -60,12 +60,12 @@ const LoginPage = () => {
           />
           <_SignUpText>
             아직 계정이 없으신가요?
-            <_SignUpButton onClick={onClick}>회원가입</_SignUpButton>
+            <_SignUpButton onClick={openModal}>회원가입</_SignUpButton>
           </_SignUpText>
           <Button color="main02">로그인</Button>
         </_InnerWrapper>
       </_LoginWrapper>
-      {modal && <SignUpModal setModal={setModal} />}
+      {modal && <SignUpModal />}
     </_Wrapper>
   );
 };
