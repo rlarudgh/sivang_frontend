@@ -1,18 +1,18 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { Logo, LoginImage } from "../../assets";
-import { LoginType } from "../../types/login";
-import Input from "../../components/common/input";
-import Button from "../../components/common/button";
-import SignUpModal from "../../components/modal/SignUp";
+import { useState } from 'react';
+import styled from 'styled-components';
+import { Logo, LoginImage } from '../../assets';
+import { LoginType } from '../../types/login';
+import Input from '../../components/common/input';
+import Button from '../../components/common/button';
+import SignUpModal from '../../components/modal/SignUp';
 import { useModal } from '../../hooks/useModal';
-import { useRecoilValue } from "recoil";
-import { modalState } from "../../utils/atom";
+import { useRecoilValue } from 'recoil';
+import { modalState } from '../../utils/atom';
 
 const LoginPage = () => {
   const [information, setInformation] = useState<LoginType>({
-    id: "",
-    password: "",
+    id: '',
+    password: '',
   });
   const { openModal, closeModal } = useModal();
   const modal = useRecoilValue(modalState);
@@ -97,7 +97,7 @@ const _LogoWrapper = styled.div`
 
 const _LogoText = styled.span`
   font-size: 48px;
-  font-family: "Noto Sans";
+  font-family: 'Noto Sans';
   font-weight: bold;
   color: ${({ theme }) => theme.color.gray800};
   text-align: center;
@@ -159,7 +159,7 @@ const _PromotionWrapper = styled.div`
 const _Promotion = styled.p`
   font-weight: bold;
   font-size: 36px;
-  font-family: "Noto Sans";
+  font-family: 'Noto Sans';
   color: ${({ theme }) => theme.color.main02};
 `;
 
