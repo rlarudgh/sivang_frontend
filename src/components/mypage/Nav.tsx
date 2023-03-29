@@ -7,11 +7,11 @@ interface PropsType {
 
 const MyPageNav = ({ information }: PropsType) => {
   const { email, join, autoPost, totalUse, totalSave }: MyPageListType = information;
+  
   return (
     <_ItemWrapper>
       <_InformationWrapper>
         <_InformationNav>
-          <_Title>회원 정보</_Title>
           <_SubWrapper>
             <_SubInformation>
               <_SubTitle>이메일</_SubTitle>
@@ -27,8 +27,7 @@ const MyPageNav = ({ information }: PropsType) => {
             </_SubInformation>
           </_SubWrapper>
         </_InformationNav>
-        <_InformationNav>
-          <_Title>총 사용 횟수</_Title>
+        <_UseWrapper>
           <_SubWrapper>
             <_SubInformation>
               <_SubTitle>총 돈 사용 횟수</_SubTitle>
@@ -39,7 +38,7 @@ const MyPageNav = ({ information }: PropsType) => {
               <_SubInformationText>{totalSave}번</_SubInformationText>
             </_SubInformation>
           </_SubWrapper>
-        </_InformationNav>
+        </_UseWrapper>
       </_InformationWrapper>
     </_ItemWrapper>
   );
@@ -69,7 +68,7 @@ const _Title = styled.p`
 
 const _SubTitle = styled(_Title)`
   ${({ theme }) => theme.font.body3};
-  color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.color.main01};
 `;
 
 const _SubWrapper = styled.div`
@@ -90,4 +89,10 @@ const _SubInformationText = styled.span`
 
 const _InformationNav = styled.div`
   width: 50%;
+`;
+
+const _UseWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 `;
