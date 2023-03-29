@@ -14,7 +14,7 @@ const LoginPage = () => {
     id: '',
     password: '',
   });
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
   const modal = useRecoilValue(modalState);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
