@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { TransactionType } from "../../types/transaction";
-import { Plus, Minus, Garbage } from "../../assets";
-import { useModal } from "../../hooks/useModal";
+import styled from 'styled-components';
+import { TransactionType } from '../../types/transaction';
+import { Plus, Minus, Garbage } from '../../assets';
+import { useModal } from '../../hooks/useModal';
 
 interface PropsType {
   transaction: TransactionType;
-  type: "+" | "-";
+  type: '+' | '-';
 }
 
 const List = ({ transaction, type }: PropsType) => {
@@ -18,7 +18,7 @@ const List = ({ transaction, type }: PropsType) => {
   return (
     <_Wrapper type={type} onClick={openModal}>
       <_LeftWrapper>
-        <img onClick={onClick} src={type === "+" ? Plus : Minus} alt={type} />
+        <img onClick={onClick} src={type === '+' ? Plus : Minus} alt={type} />
         <_Text>{transaction.description}</_Text>
       </_LeftWrapper>
       <_RightWrapper>
@@ -31,20 +31,17 @@ const List = ({ transaction, type }: PropsType) => {
 
 export default List;
 
-const _Wrapper = styled.div<{ type: "+" | "-" }>`
+const _Wrapper = styled.div<{ type: '+' | '-' }>`
   width: 450px;
   padding: 0 20px;
   height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid
-    ${({ type, theme }) =>
-      type === "+" ? theme.color.focus : theme.color.main01};
+  border: 1px solid ${({ type, theme }) => (type === '+' ? theme.color.focus : theme.color.main01)};
   border-radius: 8px;
   margin-bottom: 20px;
-  color: ${({ theme, type }) =>
-    type === "+" ? theme.color.focus : theme.color.main01};
+  color: ${({ theme, type }) => (type === '+' ? theme.color.focus : theme.color.main01)};
   cursor: pointer;
   @keyframes sizeUp {
     0% {
