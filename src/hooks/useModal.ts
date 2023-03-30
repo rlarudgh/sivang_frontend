@@ -1,14 +1,21 @@
-import { useSetRecoilState } from "recoil";
-import { modalState } from "../utils/atom";
+import { SetterOrUpdater, useSetRecoilState } from 'recoil';
+import { modalState } from '../utils/atom';
 
-export const useModal = () => {
-  const setModalState = useSetRecoilState(modalState);
+interface ReturnType {
+  openModal: () => void;
+  closeModal: () => void;
+}
 
-  const openModal = () => {
+type voidFunc = () => void;
+
+export const useModal = (): ReturnType => {
+  const setModalState: SetterOrUpdater<boolean> = useSetRecoilState<boolean>(modalState);
+
+  const openModal: voidFunc = () => {
     setModalState(true);
   };
 
-  const closeModal = () => {
+  const closeModal: voidFunc = () => {
     setModalState(false);
   };
 
