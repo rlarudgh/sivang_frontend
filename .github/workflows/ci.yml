@@ -18,21 +18,20 @@ jobs:
         with:
           node-version: 18
       - run: corepack enable
-      - run: pnpm --version
+      - run: yarn --version
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          cache: 'yarn'
       - name: install
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: yarn install --frozen-lockfile --prefer-offline
       - name: format
-        run: pnpm format
+        run: yarn format
       - name: lint
-        run: pnpm run lint
+        run: yarn run lint
       - name: audit
         if: (${{ success() }} || ${{ failure() }})
-        run: pnpm audit
+        run: yarn audit
       - name: test
         if: (${{ success() }} || ${{ failure() }})
-        run: pnpm test:self
+        run: yarn test:self
