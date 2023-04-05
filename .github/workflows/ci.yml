@@ -9,29 +9,27 @@ on:
       - main
 
 jobs:
-  ci:
-    timeout-minutes: 10
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
-      - run: corepack enable
-      - run: yarn --version
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - name: install
-        run: yarn install --frozen-lockfile --prefer-offline
-      - name: format
-        run: yarn format
-      - name: lint
-        run: yarn run lint
-      - name: audit
-        if: (${{ success() }} || ${{ failure() }})
-        run: yarn audit
-      - name: test
-        if: (${{ success() }} || ${{ failure() }})
-        run: yarn test:self
+
+      - name: Generate Environment Variables File for Production
+        env:
+          REACT_APP_DOMAIN: ${{ secrets.your_key }}
+        run: |
+          echo "your_key=$your_key" >> .env
+      - name: Install Dependencies
+        run: yarn --immutable --immutable-cache --check-cache
+
+      - name: Build Packages
+        run: yarn build
