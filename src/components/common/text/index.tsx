@@ -1,18 +1,8 @@
-import styled from "styled-components";
-import { useState, useRef } from "react";
-import { TextFieldType } from "../../../types/text";
+import styled from 'styled-components';
+import { useState, useRef } from 'react';
+import { TextFieldType } from '../../../types/text';
 
-const TextField = ({
-  type,
-  name,
-  placeholder,
-  value,
-  error,
-  errorMsg,
-  onChange,
-  width,
-  height,
-}: TextFieldType) => {
+const TextField = ({ type, name, placeholder, value, error, errorMsg, onChange, width, height }: TextFieldType) => {
   const [inputClick, setInputClick] = useState<boolean>(false);
   const ref = useRef<HTMLInputElement>(null);
 
@@ -31,7 +21,7 @@ const TextField = ({
           ref={ref}
           type={type}
           name={name}
-          placeholder={inputClick ? "" : placeholder}
+          placeholder={inputClick ? '' : placeholder}
           value={value}
           onChange={onChange}
           autoComplete="off"
@@ -53,23 +43,17 @@ const _Wrapper = styled.div<{ width?: number; height?: number }>`
   `}
 `;
 
-const _InputWrapper = styled.div<{ error?: boolean; value?: string }>`
+const _InputWrapper = styled.div<{ error?: boolean; value?: string | number }>`
   width: 100%;
   height: 40px;
   box-sizing: border-box;
   padding: 6px 8px;
   border-bottom: 1px solid
-    ${({ theme, value, error }) =>
-      error
-        ? theme.color.error
-        : value
-        ? theme.color.main02
-        : theme.color.gray400};
+    ${({ theme, value, error }) => (error ? theme.color.error : value ? theme.color.main02 : theme.color.gray400)};
   display: flex;
   align-items: center;
   :focus-within {
-    border-bottom: 1px solid
-      ${({ theme, error }) => (error ? theme.color.error : theme.color.main02)};
+    border-bottom: 1px solid ${({ theme, error }) => (error ? theme.color.error : theme.color.main02)};
   }
 `;
 
