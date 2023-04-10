@@ -7,7 +7,7 @@ interface PropsType {
 
 const MyPageNav = ({ information }: PropsType) => {
   const { email, join, autoPost, totalUse, totalSave }: MyPageListType = information;
-  
+
   return (
     <_ItemWrapper>
       <_InformationWrapper>
@@ -89,10 +89,14 @@ const _SubInformationText = styled.span`
 
 const _InformationNav = styled.div`
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const _UseWrapper = styled.div`
+  width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 `;
