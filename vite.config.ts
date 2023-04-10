@@ -6,13 +6,9 @@ import { resolve } from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
-    alias: [
-      { find: '@src', replacement: resolve(__dirname, 'src') },
-      {
-        find: '@components',
-        replacement: resolve(__dirname, 'src/components'),
-      },
-    ],
+    alias: {
+      '@': '/src',
+    },
   },
 
   plugins: [react(), tsconfigPaths()],
