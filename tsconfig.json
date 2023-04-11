@@ -20,7 +20,12 @@
       "@/components/*": ["components/*"],
       "@/utils/*": ["utils/*"],
       "@/styles/*": ["styles/*"],
-      "@/images/*": ["images/*"]
+      "@/images/*": ["images/*"],
+      "@/types/*": ["types/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/page/*": ["page/*"],
+      "@/apis/*": ["apis/*"],
+      "@/constants/*": ["constants/*"]
     }
   },
   "include": ["src"],
