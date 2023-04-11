@@ -1,5 +1,5 @@
 export interface TextFieldType {
-  type?: "text" | "password";
+  type?: 'text' | 'password' | 'number';
   name?: string;
   placeholder: string;
   value?: string | number;
