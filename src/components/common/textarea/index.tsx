@@ -1,22 +1,11 @@
-import styled from "styled-components";
-import { TextAreaType } from "../../../types/textarea";
+import styled from 'styled-components';
+import { TextAreaType } from '@/@types/textarea';
 
-const TextArea = ({
-  name,
-  value,
-  onChange,
-  label,
-  placeholder,
-}: TextAreaType) => {
+const TextArea = ({ name, value, onChange, label, placeholder }: TextAreaType) => {
   return (
     <_Wrapper>
       <_Text>{label}</_Text>
-      <_TextArea
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-      />
+      <_TextArea name={name} value={value} onChange={onChange} placeholder={placeholder} />
       <_CountText>{value.length}/2000</_CountText>
     </_Wrapper>
   );

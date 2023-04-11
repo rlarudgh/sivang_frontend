@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
-import { TextFieldType } from '../../../types/text';
+import { TextFieldType } from '@/@types/text';
 
 const TextField = ({ type, name, placeholder, value, error, errorMsg, onChange, width, height }: TextFieldType) => {
   const [inputClick, setInputClick] = useState<boolean>(false);

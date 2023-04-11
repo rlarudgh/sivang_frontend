@@ -1,11 +1,11 @@
-import Header from '../../components/common/header';
+import Header from '@/components/common/header';
 import styled from 'styled-components';
-import TextField from '../../components/common/text';
+import TextField from '@/components/common/text';
 import { useState, ChangeEvent } from 'react';
-import { PrepareType } from '../../types/prepare';
-import { Plus, Minus } from '../../assets';
-import TextArea from '../../components/common/textarea';
-import Button from '../../components/common/button';
+import { PrepareType } from '@/@types/prepare';
+import { Plus, Minus } from '@/assets';
+import TextArea from '@/components/common/textarea';
+import Button from '@/components/common/button';
 
 const WritePage = () => {
   const [prepare, setPrepare] = useState<PrepareType>({
@@ -49,6 +49,7 @@ const WritePage = () => {
                   placeholder="비용을 입력하세요"
                   value={prepare.cost}
                   name="cost"
+                  type="number"
                   onChange={onChange}
                 />
               </div>

@@ -1,21 +1,21 @@
-import styled from "styled-components";
-import { useModal } from "../../hooks/useModal";
-import { Minus } from "../../assets";
-import { PaymentType } from "../../types/modal";
-import { useState, ChangeEvent, useEffect } from "react";
-import TextArea from "../common/textarea";
+import styled from 'styled-components';
+import { useModal } from '../../hooks/useModal';
+import { Minus } from '../../assets';
+import { PaymentType } from '../../@types/modal';
+import { useState, ChangeEvent, useEffect } from 'react';
+import TextArea from '../common/textarea';
 
 const ModifyItem = () => {
   const [information, setInformation] = useState<PaymentType>({
     id: 0,
-    type: "+",
-    title: "",
-    content: "",
+    type: '+',
+    title: '',
+    content: '',
     cost: 0,
   });
-  const [radio, setRadio] = useState<string>("입금");
+  const [radio, setRadio] = useState<string>('입금');
   const { closeModal }: { closeModal: () => void } = useModal();
-  const type: string[] = ["입금", "출금"];
+  const type: string[] = ['입금', '출금'];
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value }: { name: string; value: string } = e.target;
@@ -26,7 +26,7 @@ const ModifyItem = () => {
   };
 
   useEffect(() => {
-    setInformation({ ...information, type: radio === "입금" ? "+" : "-" });
+    setInformation({ ...information, type: radio === '입금' ? '+' : '-' });
   }, [radio]);
 
   return (
@@ -34,12 +34,7 @@ const ModifyItem = () => {
       <div>
         <_InnerWrapper>
           <_Image src={Minus} alt="type" onClick={closeModal} />
-          <_Input
-            placeholder="제목을 입력하세요"
-            value={information.title}
-            name="title"
-            onChange={onChange}
-          />
+          <_Input placeholder="제목을 입력하세요" value={information.title} name="title" onChange={onChange} />
         </_InnerWrapper>
         <_Bar />
       </div>
@@ -57,7 +52,7 @@ const ModifyItem = () => {
         <_CostItem>
           <_CostInput
             placeholder="9999999까지"
-            value={information.cost === 0 ? "" : information.cost}
+            value={information.cost === 0 ? '' : information.cost}
             name="cost"
             onChange={onChange}
           />
@@ -71,9 +66,7 @@ const ModifyItem = () => {
               <_Radio
                 key={idx}
                 checked={value === radio}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setRadio(e.target.name)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setRadio(e.target.name)}
                 type="radio"
                 value={value}
                 name={value}

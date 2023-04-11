@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { useModal } from "../../hooks/useModal";
-import Button from "../common/button";
-import { useState, useEffect } from "react";
-import CheckItem from "./Check";
-import ModifyItem from "./Modify";
+import styled from 'styled-components';
+import { useModal } from '@/hooks/useModal';
+import Button from '../common/button';
+import { useState, useEffect } from 'react';
+import CheckItem from './Check';
+import ModifyItem from './Modify';
 
 const DetailModal = () => {
   const { closeModal }: { closeModal: () => void } = useModal();
@@ -14,26 +14,22 @@ const DetailModal = () => {
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       closeModal();
     }
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [closeModal]);
 
   return (
     <_Wrapper onClick={closeModal}>
-      <_Modal
-        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-          e.stopPropagation()
-        }
-      >
+      <_Modal onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}>
         <_ItemWrapper>
           {modify ? <ModifyItem /> : <CheckItem />}
           <_ButtonWrapper>

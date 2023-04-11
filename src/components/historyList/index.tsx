@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { TransactionType } from "../../types/transaction/index";
-import List from "./List";
+import styled from 'styled-components';
+import { TransactionType } from '@/@types/transaction';
+import List from './List';
 
-export type Type = "+" | "-";
+export type Type = '+' | '-';
 
 export interface PropsType {
   transaction: TransactionType[];
@@ -12,17 +12,11 @@ export interface PropsType {
 const HistoryList = ({ transaction, type }: PropsType) => {
   return (
     <_Wrapper>
-      <_Text type={type}>{type === "+" ? "저축" : "지출"}</_Text>
+      <_Text type={type}>{type === '+' ? '저축' : '지출'}</_Text>
       <_InnerWrapper>
         {transaction.map((element: TransactionType, index: number) => {
           if (index < 8) {
-            return (
-              <List
-                key={element.id}
-                transaction={element}
-                type={type}
-              />
-            );
+            return <List key={element.id} transaction={element} type={type} />;
           }
         })}
       </_InnerWrapper>
@@ -39,8 +33,7 @@ const _Wrapper = styled.div`
 
 const _Text = styled.p<{ type: Type }>`
   ${({ theme }) => theme.font.body4};
-  color: ${({ theme, type }) =>
-    type === "+" ? theme.color.focus : theme.color.main01};
+  color: ${({ theme, type }) => (type === '+' ? theme.color.focus : theme.color.main01)};
 `;
 
 const _InnerWrapper = styled.div`

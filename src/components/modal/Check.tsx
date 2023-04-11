@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useModal } from '../../hooks/useModal';
-import { Minus } from '../../assets';
-import { PaymentDummy } from '../../constants/payment';
+import { useModal } from '@/hooks/useModal';
+import { Minus } from '@/assets';
+import { PaymentDummy } from '@/constants/payment';
 
 const CheckItem = () => {
   const { closeModal } = useModal();

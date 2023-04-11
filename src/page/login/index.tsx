@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Logo, LoginImage } from '../../assets';
-import { LoginType } from '../../types/login';
-import Input from '../../components/common/input';
-import Button from '../../components/common/button';
-import SignUpModal from '../../components/modal/SignUp';
-import { useModal } from '../../hooks/useModal';
+import { Logo, LoginImage } from '@/assets';
+import { LoginType } from '@/@types/login';
+import Button from '@/components/common/button';
+import Input from '@/components/common/input';
+import SignUpModal from '@/components/modal/SignUp';
+import { useModal } from '@/hooks/useModal';
 import { useRecoilValue } from 'recoil';
-import { modalState } from '../../utils/atom';
+import { modalState } from '@/utils/atom';
 
 const LoginPage = () => {
   const [information, setInformation] = useState<LoginType>({

@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { ReactNode } from "react";
-import { color, keyOfColorType } from "../../../styles/theme/color";
+import styled from 'styled-components';
+import { ReactNode } from 'react';
+import { color, keyOfColorType } from '@/styles/theme/color';
 
 interface PropsType {
   children: ReactNode;
@@ -28,7 +28,7 @@ const _Wrapper = styled.button<{ buttonColor: keyOfColorType }>`
   font-size: 20px;
   font-weight: 600;
   gap: 10px;
-  font-family: "Noto Sans";
+  font-family: 'Noto Sans';
   cursor: pointer;
   :hover {
     color: ${({ theme }) => theme.color.gray100};

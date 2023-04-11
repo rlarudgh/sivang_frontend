@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Message, Github, Logo } from '../../../assets';
+import { Message, Logo, Github } from '@/assets';
 
 const Footer = () => {
   const job: string[] = ['Frontend', 'Backend', 'Design'];
@@ -120,6 +120,6 @@ const _LogoWrapper = styled.div`
 `;
 
 const _LogoText = styled.span`
-    color: ${({theme}) => theme.color.main02};
-    ${({theme}) => theme.font.title1};
-`
+  color: ${({ theme }) => theme.color.main02};
+  ${({ theme }) => theme.font.title1};
+`;

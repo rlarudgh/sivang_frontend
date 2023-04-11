@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import Input from '../common/input';
 import Button from '../common/button';
 import { useState } from 'react';
-import { SignUpType } from '../../types/signUp';
-import { customToast } from '../../utils/toast';
-import { ModalType } from '../../types/modal';
-import { useModal } from '../../hooks/useModal';
+import { SignUpType } from '@/@types/signUp';
+import { customToast } from '@/utils/toast';
+import { useModal } from '@/hooks/useModal';
 
 const SignUpModal = () => {
   const { closeModal } = useModal();
