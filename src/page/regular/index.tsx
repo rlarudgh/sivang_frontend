@@ -1,13 +1,27 @@
 import styled from 'styled-components';
 import Header from '@/components/common/header';
+import Button from '@/components/common/button';
+import { RegularType } from '@/types/regular';
+import RegularList from '@/components/regularList';
+import { RegularDummy } from '@/constants/regular';
 
 const RegularPage = () => {
   return (
     <_Wrapper>
       <Header />
-      <div>
-        
-      </div>
+      <_InnerWrapper>
+        <_RegularWrapper>
+          <_TopWrapper>
+            <_Title>등록한 규칙적인 기록들 📝</_Title>
+            <Button color="main01">주기 작성 추가</Button>
+          </_TopWrapper>
+          <_ListWrapper>
+            {RegularDummy.map((item: RegularType) => (
+              <RegularList key={item.id} data={item}/>
+            ))}
+          </_ListWrapper>
+        </_RegularWrapper>
+      </_InnerWrapper>
     </_Wrapper>
   );
 };
@@ -17,4 +31,37 @@ export default RegularPage;
 const _Wrapper = styled.body`
   width: 100vw;
   height: 100vh;
+`;
+
+const _RegularWrapper = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+`;
+
+const _Title = styled.h2`
+  color: ${({ theme }) => theme.color.black};
+  ${({ theme }) => theme.font.title3};
+`;
+
+const _TopWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const _InnerWrapper = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
+
+const _ListWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.color.gray100};
+  justify-content: space-around;
+  margin-top: 10px;
 `;

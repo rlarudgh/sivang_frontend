@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TextAreaType } from '@/@types/textarea';
+import { TextAreaType } from '@/types/textarea';
 
 const TextArea = ({ name, value, onChange, label, placeholder }: TextAreaType) => {
   return (

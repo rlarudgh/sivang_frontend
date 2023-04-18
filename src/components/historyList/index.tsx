@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TransactionType } from '@/@types/transaction';
+import { TransactionType } from '@/types/transaction';
 import List from './List';
 
 export type Type = '+' | '-';

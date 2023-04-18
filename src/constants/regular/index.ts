@@ -1,0 +1,88 @@
+import { RegularType } from '@/types/regular';
+
+export const RegularDummy: RegularType[] = [
+  {
+    id: 1,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 2,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 3,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 4,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 5,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 6,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 7,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 8,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 9,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 10,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 11,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+  {
+    id: 12,
+    title: '월급',
+    amount: 100000,
+    periodic: 30,
+    type: '+',
+  },
+];

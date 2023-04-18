@@ -1,4 +1,4 @@
-import { PaymentType } from '../../@types/modal';
+import { PaymentType } from '../../types/modal';
 
 export const PaymentDummy: PaymentType = {
   id: 1,

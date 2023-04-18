@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useModal } from '../../hooks/useModal';
 import { Minus } from '../../assets';
-import { PaymentType } from '../../@types/modal';
+import { PaymentType } from '../../types/modal';
 import { useState, ChangeEvent, useEffect } from 'react';
 import TextArea from '../common/textarea';
 

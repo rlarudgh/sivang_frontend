@@ -2,7 +2,7 @@ import Header from '@/components/common/header';
 import styled from 'styled-components';
 import TextField from '@/components/common/text';
 import { useState, ChangeEvent } from 'react';
-import { PrepareType } from '@/@types/prepare';
+import { PrepareType } from '@/types/prepare';
 import { Plus, Minus } from '@/assets';
 import TextArea from '@/components/common/textarea';
 import Button from '@/components/common/button';

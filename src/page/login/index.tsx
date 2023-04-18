@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Logo, LoginImage } from '@/assets';
-import { LoginType } from '@/@types/login';
+import { LoginType } from '@/types/login';
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
 import SignUpModal from '@/components/modal/SignUp';

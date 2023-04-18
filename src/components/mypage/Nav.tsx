@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MyPageListType } from '../../@types/mypage';
+import { MyPageListType } from '../../types/mypage';
 
 interface PropsType {
   information: MyPageListType;

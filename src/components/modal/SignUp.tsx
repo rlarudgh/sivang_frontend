@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Input from '../common/input';
 import Button from '../common/button';
 import { useState } from 'react';
-import { SignUpType } from '@/@types/signUp';
+import { SignUpType } from '@/types/signUp';
 import { customToast } from '@/utils/toast';
 import { useModal } from '@/hooks/useModal';
 

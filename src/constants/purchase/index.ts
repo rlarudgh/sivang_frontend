@@ -1,4 +1,4 @@
-import { TransactionType } from '../../@types/transaction';
+import { TransactionType } from '../../types/transaction';
 
 export const TransactionDummy: TransactionType[] = [
   {

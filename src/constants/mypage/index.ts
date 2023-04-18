@@ -1,4 +1,4 @@
-import { MyPageListType } from '../../@types/mypage';
+import { MyPageListType } from '../../types/mypage';
 
 export const MyPageList: MyPageListType = {
   email: 'test1234@dsm.hs.kr',
