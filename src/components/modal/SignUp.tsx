@@ -5,24 +5,27 @@ import { useState } from 'react';
 import { SignUpType } from '@/types/signUp';
 import { customToast } from '@/utils/toast';
 import { useModal } from '@/hooks/useModal';
+import { SignUp } from '@/apis/signUp';
 
 const SignUpModal = () => {
   const { closeModal } = useModal();
   const [data, setData] = useState<SignUpType>({
-    name: '',
     email: '',
+    name: '',
     password: '',
-    reTypingPassword: '',
+    passwordConfirmation: '',
   });
 
   const onClickSignUp = () => {
-    const regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}'); // email 정규식
-    if (!regex.test(data.email)) {
-      customToast('이메일을 확인해주세요.', 'error');
-    } else if (data.password !== data.reTypingPassword) {
-      customToast('비밀번호를 확인해주세요.', 'error');
-    }
-    // 서버 호출
+    SignUp(data)
+      .then(res => {
+        customToast('회원가입이 완료되었습니다.', 'success');
+        console.log(res);
+        closeModal();
+      })
+      .catch(err => {
+        customToast(err.response.data.message, 'error');
+      });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,8 +63,8 @@ const SignUpModal = () => {
           type="password"
           placeholder="비밀번호를 한번 더 입력해주세요. "
           onChange={onChange}
-          value={data.reTypingPassword}
-          name="reTypingPassword"
+          value={data.passwordConfirmation}
+          name="passwordConfirmation"
           text="비밀번호 확인"
         />
         <Button onClick={onClickSignUp} color="main01">
