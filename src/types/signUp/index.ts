@@ -1,6 +1,6 @@
 export interface SignUpType {
-  name: string;
   email: string;
+  name: string;
   password: string;
-  reTypingPassword: string;
+  passwordConfirmation: string;
 }
