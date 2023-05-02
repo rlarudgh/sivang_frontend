@@ -34,9 +34,10 @@ const LoginPage = () => {
     Login(information)
       .then(({ data }: any) => {
         const { access_token, expiredIn }: DataType = data;
-        const expiresInMs: number = Date.parse(expiredIn) - Date.now();
-        const expires: Date = new Date(Date.now() + expiresInMs);
+        const expires: Date = new Date(Date.now() + 1);
+        console.log(expires.getTime());
         setCookie('accessToken', access_token, expires);
+        window.location.href = '/main';
       })
       .catch(err => {
         customToast(err.response.data.message, 'error');
