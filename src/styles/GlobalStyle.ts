@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -7,14 +7,9 @@ const GlobalStyle = createGlobalStyle`
         outline: 0;
         box-sizing: border-box;
         border: 0;
+        font-family: pretendard, sans-serif;
     }
-    button {
-        background: transparent;
-    }
-    input{
-        background: transparent;
-    }
-    textarea{
+    button, input, textarea {
         background: transparent;
     }
 `;
