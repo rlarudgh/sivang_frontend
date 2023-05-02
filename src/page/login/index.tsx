@@ -8,10 +8,18 @@ import SignUpModal from '@/components/modal/SignUp';
 import { useModal } from '@/hooks/useModal';
 import { useRecoilValue } from 'recoil';
 import { modalState } from '@/utils/atom';
+import { Login } from '@/apis/login';
+import { customToast } from '@/utils/toast';
+import { setCookie } from '@/utils/cookie';
+
+interface DataType {
+  access_token: string;
+  expiredIn: string;
+}
 
 const LoginPage = () => {
   const [information, setInformation] = useState<LoginType>({
-    id: '',
+    email: '',
     password: '',
   });
   const { openModal } = useModal();
@@ -20,6 +28,19 @@ const LoginPage = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInformation({ ...information, [name]: value });
+  };
+
+  const onClick = () => {
+    Login(information)
+      .then(({ data }: any) => {
+        const { access_token, expiredIn }: DataType = data;
+        const expiresInMs: number = Date.parse(expiredIn) - Date.now();
+        const expires: Date = new Date(Date.now() + expiresInMs);
+        setCookie('accessToken', access_token, expires);
+      })
+      .catch(err => {
+        customToast(err.response.data.message, 'error');
+      });
   };
 
   return (
@@ -44,11 +65,11 @@ const LoginPage = () => {
           </_Text>
           <Input
             type="text"
-            placeholder="아이디를 입력하세요"
+            placeholder="이메일을 입력하세요"
             onChange={onChange}
-            value={information.id}
-            name="id"
-            text="아이디"
+            value={information.email}
+            name="email"
+            text="이메일"
           />
           <Input
             type="password"
@@ -62,7 +83,9 @@ const LoginPage = () => {
             아직 계정이 없으신가요?
             <_SignUpButton onClick={openModal}>회원가입</_SignUpButton>
           </_SignUpText>
-          <Button color="main02">로그인</Button>
+          <Button onClick={onClick} color="main02">
+            로그인
+          </Button>
         </_InnerWrapper>
       </_LoginWrapper>
       {modal && <SignUpModal />}
