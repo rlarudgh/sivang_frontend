@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { RegularType } from '@/types/regular';
 import { Plus, Minus } from '@/assets';
 
+interface StyledType {
+  type: '+' | '-';
+}
+
 const RegularList = ({ data }: { data: RegularType }) => {
   const { id, title, amount, periodic, type }: RegularType = data;
 
@@ -21,7 +25,7 @@ const RegularList = ({ data }: { data: RegularType }) => {
 
 export default RegularList;
 
-const _Wrapper = styled.div<{ type: '+' | '-' }>`
+const _Wrapper = styled.div<StyledType>`
   width: 100%;
   height: 100px;
   background-color: ${({ theme }) => theme.color.background};
@@ -45,7 +49,7 @@ const _Title = styled.span`
   color: ${({ theme }) => theme.color.black};
 `;
 
-const _Text = styled.span<{ type: '+' | '-' }>`
+const _Text = styled.span<StyledType>`
   ${({ theme }) => theme.font.body6};
   color: ${props => (props.type === '+' ? props.theme.color.focus : props.theme.color.main01)};
 `;
