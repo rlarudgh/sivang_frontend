@@ -1,18 +1,28 @@
-import Header from '../../components/common/header';
+import Header from '@/components/common/header';
 import styled from 'styled-components';
-import { MainBackground } from '../../assets';
-import Button from '../../components/common/button';
-import HistoryList from '../../components/historyList';
-import { TransactionDummy } from '../../constants/purchase';
+import { MainBackground } from '@/assets';
+import Button from '@/components/common/button';
+import HistoryList from '@/components/historyList';
+import { TransactionDummy } from '@/constants/purchase';
 import { useRecoilValue } from 'recoil';
-import { modalState } from '../../utils/atom';
-import DetailModal from '../../components/modal/Detail';
+import { modalState } from '@/utils/atom';
+import DetailModal from '@/components/modal/Detail';
+import { useEffect } from 'react';
+import { customToast } from '@/utils/toast';
 
 const MainPage = () => {
   const modal = useRecoilValue(modalState);
+
   const onClick = () => {
     window.location.href = '/write';
   };
+
+  useEffect(() => {
+    console.log(document.referrer);
+    if (document.referrer === 'http://localhost:3000/') {
+      customToast('로그인 성공!', 'success');
+    }
+  }, []);
 
   return (
     <_Wrapper>
