@@ -5,4 +5,16 @@ export const RecordDummy = [
     type: '+',
     amount: 10000,
   },
+  {
+    id: 2,
+    title: '점심식사',
+    type: '-',
+    amount: 5000,
+  },
+  {
+    id: 3,
+    title: '커피',
+    type: '-',
+    amount: 3000,
+  },
 ];
