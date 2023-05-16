@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import { Logo } from '@/assets/index';
 import Button from '../button';
 import { Link } from 'react-router-dom';
+import { removeCookie } from '@/utils/cookie';
 
 const Header = () => {
   const onClick = () => {
     window.location.href = '/main';
+  };
+
+  const logoutOnClick = () => {
+    removeCookie('accessToken');
+    window.location.href = '/';
   };
 
   return (
@@ -19,7 +25,9 @@ const Header = () => {
         <_Text to="/record">작성 기록</_Text>
         <_Text to="/mypage">마이페이지</_Text>
       </_UpperWrapper>
-      <Button color="main02">로그아웃</Button>
+      <Button onClick={logoutOnClick} color="main02">
+        로그아웃
+      </Button>
     </_Wrapper>
   );
 };
