@@ -1,7 +1,10 @@
 export interface MyPageListType {
-  email: string;
-  join: string;
-  autoPost: number;
-  totalUse: number;
-  totalSave: number;
+  message: string;
+  profile: {
+    id: number;
+    email: string;
+    name: string;
+    createAt: string;
+    moneys: [];
+  };
 }

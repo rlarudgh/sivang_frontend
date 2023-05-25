@@ -1,12 +1,38 @@
 import styled from 'styled-components';
-import { MyPageListType } from '../../types/mypage';
+import { useEffect, useState } from 'react';
+import { getProfile } from '@/apis/mypage';
+import { AxiosError } from 'axios';
 
-interface PropsType {
-  information: MyPageListType;
+interface InformationType {
+  id: number;
+  email: string;
+  name: string;
+  createAt: string;
+  moneys: [];
 }
 
-const MyPageNav = ({ information }: PropsType) => {
-  const { email, join, autoPost, totalUse, totalSave }: MyPageListType = information;
+const MyPageNav = () => {
+  const [information, setInformation] = useState<InformationType>({
+    id: 0,
+    email: '기본',
+    name: '기본',
+    createAt: '기본',
+    moneys: [],
+  });
+
+  const setCreateAt = (date: string) => {
+    let [year, month, day] = date.split('-');
+    day = day.substring(0, 2);
+    setInformation(prev => ({ ...prev, createAt: `${year}.${month}.${day}` }));
+  };
+  useEffect(() => {
+    getProfile()
+      .then(({ data }) => {
+        setInformation(prev => ({ ...prev, ...data.profile }));
+        setCreateAt(data.profile.createAt);
+      })
+      .catch((err: AxiosError) => console.error(err));
+  }, []);
 
   return (
     <_ItemWrapper>
@@ -15,30 +41,18 @@ const MyPageNav = ({ information }: PropsType) => {
           <_SubWrapper>
             <_SubInformation>
               <_SubTitle>이메일</_SubTitle>
-              <_SubInformationText>{email}</_SubInformationText>
+              <_SubInformationText>{information.email}</_SubInformationText>
             </_SubInformation>
             <_SubInformation>
               <_SubTitle>가입 날짜</_SubTitle>
-              <_SubInformationText>{join}</_SubInformationText>
+              <_SubInformationText>{information.createAt}</_SubInformationText>
             </_SubInformation>
             <_SubInformation>
               <_SubTitle>자동 등록 수</_SubTitle>
-              <_SubInformationText>{autoPost}개</_SubInformationText>
+              <_SubInformationText>{information.moneys.length}개</_SubInformationText>
             </_SubInformation>
           </_SubWrapper>
         </_InformationNav>
-        <_UseWrapper>
-          <_SubWrapper>
-            <_SubInformation>
-              <_SubTitle>총 돈 사용 횟수</_SubTitle>
-              <_SubInformationText>{totalUse}번</_SubInformationText>
-            </_SubInformation>
-            <_SubInformation>
-              <_SubTitle>총 저축 횟수</_SubTitle>
-              <_SubInformationText>{totalSave}번</_SubInformationText>
-            </_SubInformation>
-          </_SubWrapper>
-        </_UseWrapper>
       </_InformationWrapper>
     </_ItemWrapper>
   );
