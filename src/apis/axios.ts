@@ -2,7 +2,7 @@ import { getCookie } from '@/utils/cookie';
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 const instance = axios.create({
-  baseURL: `${import.meta.env.REACT_APP_BASE_URL}`,
+  baseURL: `${import.meta.env.VITE_APP_BASE_URL}`,
   timeout: 2000,
 });
 
