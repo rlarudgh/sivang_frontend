@@ -22,7 +22,6 @@ const Header = () => {
       </_LogoWrapper>
       <_UpperWrapper>
         <_Text to="/regular">규칙적인 기록</_Text>
-        <_Text to="/record">작성 기록</_Text>
         <_Text to="/mypage">마이페이지</_Text>
       </_UpperWrapper>
       <Button onClick={logoutOnClick} color="main02">
