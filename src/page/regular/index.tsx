@@ -51,9 +51,9 @@ const RegularPage = () => {
             <Button color="main01">주기 작성 추가</Button>
           </_TopWrapper>
           <_ListWrapper>
-            {data.map((item: ListType) => (
-              <RegularList key={item.id} data={item} />
-            ))}
+            {data.map((item: ListType) => {
+              if (item.regularWeek > 0) return <RegularList key={item.id} data={item} />;
+            })}
           </_ListWrapper>
         </_RegularWrapper>
       </_InnerWrapper>
