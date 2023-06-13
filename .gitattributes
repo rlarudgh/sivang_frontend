@@ -1,1 +1,3 @@
-*.html linguist-vendord
+* linguist-vendored
+*.tsx linguist-vendored=false
+*.ts linguist-vendored=false
