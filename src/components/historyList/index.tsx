@@ -4,8 +4,18 @@ import List from './List';
 
 export type Type = '+' | '-';
 
+interface ListType {
+  amount: number;
+  auto: boolean;
+  description: string;
+  id: number;
+  regularWeek: number;
+  title: string;
+  type: boolean;
+}
+
 export interface PropsType {
-  transaction: TransactionType[];
+  transaction: ListType[];
   type: Type;
 }
 
@@ -14,9 +24,9 @@ const HistoryList = ({ transaction, type }: PropsType) => {
     <_Wrapper>
       <_Text type={type}>{type === '+' ? '저축' : '지출'}</_Text>
       <_InnerWrapper>
-        {transaction.map((element: TransactionType, index: number) => {
+        {transaction.map((element: ListType, index: number) => {
           if (index < 8) {
-            return <List key={element.id} transaction={element} type={type} />;
+            return <List key={element.id} transaction={element} type={type} id={element.id}/>;
           }
         })}
       </_InnerWrapper>
@@ -45,6 +55,5 @@ const _InnerWrapper = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 `;
