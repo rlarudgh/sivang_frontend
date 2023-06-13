@@ -25,6 +25,7 @@ const MyPageNav = () => {
     day = day.substring(0, 2);
     setInformation(prev => ({ ...prev, createAt: `${year}.${month}.${day}` }));
   };
+  
   useEffect(() => {
     getProfile()
       .then(({ data }) => {

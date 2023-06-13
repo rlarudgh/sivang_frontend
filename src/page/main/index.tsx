@@ -7,22 +7,62 @@ import { TransactionDummy } from '@/constants/purchase';
 import { useRecoilValue } from 'recoil';
 import { modalState } from '@/utils/atom';
 import DetailModal from '@/components/modal/Detail';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { customToast } from '@/utils/toast';
+import { getProfile } from '@/apis/mypage';
+import { getPostList } from '@/apis/getPostList';
+
+interface ListType {
+  amount: number;
+  auto: boolean;
+  description: string;
+  id: number;
+  regularWeek: number;
+  title: string;
+  type: boolean;
+}
 
 const MainPage = () => {
   const modal = useRecoilValue(modalState);
+  const [name, setName] = useState<string>('');
+  const [plusMoneyList, setPlusMoneyList] = useState<ListType[]>([]);
+  const [minusMoneyList, setMinusMoneyList] = useState<ListType[]>([]);
+  const [reload, setReload] = useState<number>(0);
 
   const onClick = () => {
     window.location.href = '/write';
   };
 
   useEffect(() => {
-    console.log(document.referrer);
     if (document.referrer === 'http://localhost:3000/') {
       customToast('로그인 성공!', 'success');
     }
-  }, []);
+
+    getProfile().then(res => {
+      console.log(res);
+      setName(res.data.profile.name);
+    });
+
+    getPostList()
+      .then(res => {
+        const { data } = res;
+        const { moneyPostList } = data;
+
+        setPlusMoneyList([]);
+        setMinusMoneyList([]);
+
+        for (const info of moneyPostList) {
+          if (info.type) {
+            setPlusMoneyList(prev => [...prev, info]);
+          } else {
+            setMinusMoneyList(prev => [...prev, info]);
+          }
+        }
+      })
+      .catch((err: unknown) => {
+        console.error(err);
+      });
+  }, [reload]);
 
   return (
     <_Wrapper>
@@ -31,10 +71,10 @@ const MainPage = () => {
         <_IntroduceWrapper>
           <_TextWrapper>
             <p>
-              이번 달 <strong>김경호</strong>님이
+              이번 달 <strong>{name}</strong>님이
             </p>
-            <_Strong>총 수입 & 지출한 돈은 </_Strong>
-            <_Strong>1000원입니다.</_Strong>
+            <_Strong>오늘도</_Strong>
+            <_Strong>돈 절약해봐요!</_Strong>
           </_TextWrapper>
           <Button onClick={onClick} color="main03">
             기록 작성
@@ -42,10 +82,10 @@ const MainPage = () => {
         </_IntroduceWrapper>
       </_ItemWrapper>
       <_HistoryWrapper>
-        <HistoryList transaction={TransactionDummy} type={'+'} />
-        <HistoryList transaction={TransactionDummy} type={'-'} />
+        <HistoryList transaction={plusMoneyList} type={'+'} />
+        <HistoryList transaction={minusMoneyList} type={'-'} />
       </_HistoryWrapper>
-      {modal && <DetailModal />}
+      {modal && <DetailModal setReload={setReload} />}
     </_Wrapper>
   );
 };

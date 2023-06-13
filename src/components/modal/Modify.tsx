@@ -4,8 +4,17 @@ import { Minus } from '../../assets';
 import { PaymentType } from '../../types/modal';
 import { useState, ChangeEvent, useEffect } from 'react';
 import TextArea from '../common/textarea';
+import Button from '../common/button';
+import { getCookie } from '@/utils/cookie';
+import { modifyMoney } from '@/apis/modifyMoney';
+import { AxiosError } from 'axios';
+import { customToast } from '@/utils/toast';
 
-const ModifyItem = () => {
+interface PropsType {
+  setReload: (reload: number) => void;
+}
+
+const ModifyItem = ({ setReload }: PropsType) => {
   const [information, setInformation] = useState<PaymentType>({
     id: 0,
     type: '+',
@@ -16,6 +25,7 @@ const ModifyItem = () => {
   const [radio, setRadio] = useState<string>('입금');
   const { closeModal }: { closeModal: () => void } = useModal();
   const type: string[] = ['입금', '출금'];
+  let cnt = 1;
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value }: { name: string; value: string } = e.target;
@@ -23,6 +33,26 @@ const ModifyItem = () => {
       ...information,
       [name]: value,
     });
+  };
+
+  const onClick = () => {
+    const id: string = getCookie('id');
+    const info = {
+      title: information.title,
+      content: information.content,
+      type: information.type === '+' ? true : false,
+      cost: Number(information.cost),
+    };
+    modifyMoney(info, id)
+      .then(res => {
+        console.log(res.status);
+        customToast('수정이 완료되었습니다.', 'success');
+        closeModal();
+        setReload(1 + cnt++);
+      })
+      .catch((error: AxiosError) => {
+        console.error(error);
+      });
   };
 
   useEffect(() => {
@@ -76,6 +106,9 @@ const ModifyItem = () => {
           </_TypeItems>
         ))}
       </_TypeWrapper>
+      <Button onClick={onClick} color="main01">
+        수정
+      </Button>
     </_Wrapper>
   );
 };

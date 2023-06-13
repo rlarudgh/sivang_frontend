@@ -3,4 +3,5 @@ export interface PrepareType{
     content: string;
     type: "+" | "-";
     cost: number;
+    regular: number;
 }

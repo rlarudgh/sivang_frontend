@@ -5,7 +5,11 @@ import { useState, useEffect } from 'react';
 import CheckItem from './Check';
 import ModifyItem from './Modify';
 
-const DetailModal = () => {
+interface PropsType {
+  setReload: (reload: number) => void;
+}
+
+const DetailModal = ({ setReload }: PropsType) => {
   const { closeModal }: { closeModal: () => void } = useModal();
   const [modify, setModify] = useState<boolean>(false);
 
@@ -31,16 +35,18 @@ const DetailModal = () => {
     <_Wrapper onClick={closeModal}>
       <_Modal onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}>
         <_ItemWrapper>
-          {modify ? <ModifyItem /> : <CheckItem />}
+          {modify ? <ModifyItem setReload={setReload} /> : <CheckItem />}
           <_ButtonWrapper>
             {!modify && (
-              <Button onClick={onClick} color="main02">
-                수정
-              </Button>
+              <>
+                <Button onClick={onClick} color="main02">
+                  수정
+                </Button>
+                <Button onClick={closeModal} color="main01">
+                  확인
+                </Button>
+              </>
             )}
-            <Button onClick={closeModal} color="main01">
-              확인
-            </Button>
           </_ButtonWrapper>
         </_ItemWrapper>
       </_Modal>

@@ -2,27 +2,44 @@ import styled from 'styled-components';
 import { TransactionType } from '../../types/transaction';
 import { Plus, Minus, Garbage } from '../../assets';
 import { useModal } from '../../hooks/useModal';
+import { setCookie } from '@/utils/cookie';
 
-interface PropsType {
-  transaction: TransactionType;
-  type: '+' | '-';
+interface ListType {
+  amount: number;
+  auto: boolean;
+  description: string;
+  id: number;
+  regularWeek: number;
+  title: string;
+  type: boolean;
 }
 
-const List = ({ transaction, type }: PropsType) => {
+interface PropsType {
+  transaction: ListType;
+  type: '+' | '-';
+  id: number;
+}
+
+const List = ({ transaction, type, id }: PropsType) => {
   const { openModal } = useModal();
+
+  const openOnClick = (id: number) => {
+    openModal();
+    setCookie('id', id.toString());
+  };
 
   const onClick = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
   };
 
   return (
-    <_Wrapper type={type} onClick={openModal}>
+    <_Wrapper type={type} onClick={() => openOnClick(id)}>
       <_LeftWrapper>
         <img onClick={onClick} src={type === '+' ? Plus : Minus} alt={type} />
         <_Text>{transaction.description}</_Text>
       </_LeftWrapper>
       <_RightWrapper>
-        <_PriceText>{transaction.price}원</_PriceText>
+        <_PriceText>{transaction.amount}원</_PriceText>
         <_GarbageImage onClick={onClick} src={Garbage} alt="Garbage" />
       </_RightWrapper>
     </_Wrapper>

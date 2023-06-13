@@ -1,11 +1,13 @@
 import Header from '@/components/common/header';
 import styled from 'styled-components';
 import TextField from '@/components/common/text';
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, MouseEvent } from 'react';
 import { PrepareType } from '@/types/prepare';
 import { Plus, Minus } from '@/assets';
 import TextArea from '@/components/common/textarea';
 import Button from '@/components/common/button';
+import { makeMoney } from '@/apis/makeMoney';
+import { customToast } from '@/utils/toast';
 
 const WritePage = () => {
   const [prepare, setPrepare] = useState<PrepareType>({
@@ -13,6 +15,7 @@ const WritePage = () => {
     content: '',
     type: '+',
     cost: 0,
+    regular: 0,
   });
   const [radio, setRadio] = useState<string>('수입');
   const type: string[] = ['수입', '지출'];
@@ -20,6 +23,25 @@ const WritePage = () => {
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setPrepare({ ...prepare, [name]: value });
+  };
+
+  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+    makeMoney({
+      title: prepare.title,
+      content: prepare.content,
+      type: radio === '수입' ? true : false,
+      cost: Number(prepare.cost),
+      regularWeek: Number(prepare.regular),
+      auto: prepare.regular === 0 ? false : true,
+    })
+      .then(res => {
+        const prevPath: string = document.referrer;
+        window.location.href = prevPath;
+      })
+      .catch((error: unknown) => {
+        console.error(error);
+        customToast('내용을 잘 확인해주세요.', 'error');
+      });
   };
 
   return (
@@ -75,7 +97,18 @@ const WritePage = () => {
               </div>
             </_AdditionWrapper>
             <_ButtonWrapper>
-              <Button color="main02">확인</Button>
+              <Button color="main02" onClick={onClick}>
+                확인
+              </Button>
+              <_RegularWrapper>
+                <TextField
+                  width={300}
+                  value={!prepare.regular ? '' : prepare.regular}
+                  onChange={onChange}
+                  name="regular"
+                  placeholder="규칙적인 주 (안하고 싶을 시 0)"
+                />
+              </_RegularWrapper>
             </_ButtonWrapper>
           </_WriteWrapper>
         </_Article>
@@ -240,10 +273,14 @@ const _Text = styled.span`
 `;
 
 const _ButtonWrapper = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
 `;
 
 const _ReasonWrapper = styled.div`
   min-height: 50%;
+`;
+
+const _RegularWrapper = styled.div`
+  margin-left: 30px;
 `;

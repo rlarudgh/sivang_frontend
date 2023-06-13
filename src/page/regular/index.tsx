@@ -4,8 +4,43 @@ import Button from '@/components/common/button';
 import { RegularType } from '@/types/regular';
 import RegularList from '@/components/regularList';
 import { RegularDummy } from '@/constants/regular';
+import { useState, useEffect } from 'react';
+import { getPostList } from '@/apis/getPostList';
+import { AxiosError } from 'axios';
+
+interface ListType {
+  amount: number;
+  auto: boolean;
+  description: string;
+  id: number;
+  regularWeek: number;
+  title: string;
+  type: boolean;
+}
 
 const RegularPage = () => {
+  const [data, setData] = useState<ListType[]>([]);
+
+  useEffect(() => {
+    getPostList()
+      .then(res => {
+        const { data } = res;
+        const { moneyPostList } = data;
+        const value: ListType[] = [];
+
+        for (const item of moneyPostList) {
+          console.log(item.auto);
+          if (item.auto) {
+            value.push(item);
+          }
+        }
+        setData(value);
+      })
+      .catch((error: AxiosError) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <_Wrapper>
       <Header />
@@ -16,8 +51,8 @@ const RegularPage = () => {
             <Button color="main01">주기 작성 추가</Button>
           </_TopWrapper>
           <_ListWrapper>
-            {RegularDummy.map((item: RegularType) => (
-              <RegularList key={item.id} data={item}/>
+            {data.map((item: ListType) => (
+              <RegularList key={item.id} data={item} />
             ))}
           </_ListWrapper>
         </_RegularWrapper>

@@ -3,21 +3,29 @@ import { RegularType } from '@/types/regular';
 import { Plus, Minus } from '@/assets';
 
 interface StyledType {
-  type: '+' | '-';
+  type: boolean;
 }
 
-const RegularList = ({ data }: { data: RegularType }) => {
-  const { id, title, amount, periodic, type }: RegularType = data;
+interface ListType {
+  amount: number;
+  auto: boolean;
+  description: string;
+  id: number;
+  regularWeek: number;
+  title: string;
+  type: boolean;
+}
 
+const RegularList = ({ data }: { data: ListType }) => {
   return (
-    <_Wrapper type={type}>
+    <_Wrapper type={data.type}>
       <_Nav>
-        <img src={type === '+' ? Plus : Minus} alt="type" />
-        <_Title>{title}</_Title>
+        <img src={data.type ? Plus : Minus} alt="type" />
+        <_Title>{data.title}</_Title>
       </_Nav>
       <_Nav>
-        <_Text type={type}>{periodic}일 주기</_Text>
-        <_Text type={type}>{amount}원</_Text>
+        <_Text type={data.type}>{data.regularWeek}일 주기</_Text>
+        <_Text type={data.type}>{data.amount}원</_Text>
       </_Nav>
     </_Wrapper>
   );
@@ -35,7 +43,7 @@ const _Wrapper = styled.div<StyledType>`
   margin-bottom: 30px;
   border-radius: 10px;
   cursor: pointer;
-  border: 1px solid ${({ theme, type }) => (type === '+' ? theme.color.focus : theme.color.main01)};
+  border: 1px solid ${({ theme, type }) => (type ? theme.color.focus : theme.color.main01)};
 `;
 
 const _Nav = styled.nav`
@@ -51,5 +59,5 @@ const _Title = styled.span`
 
 const _Text = styled.span<StyledType>`
   ${({ theme }) => theme.font.body6};
-  color: ${props => (props.type === '+' ? props.theme.color.focus : props.theme.color.main01)};
+  color: ${props => (props.type ? props.theme.color.focus : props.theme.color.main01)};
 `;
