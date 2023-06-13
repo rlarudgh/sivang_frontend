@@ -1,3 +1,4 @@
 * linguist-vendored
 *.tsx linguist-vendored=false
 *.ts linguist-vendored=false
+*.json linguist-vendored=false
