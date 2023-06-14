@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import Header from '@/components/common/header';
-import Button from '@/components/common/button';
-import { RegularType } from '@/types/regular';
 import RegularList from '@/components/regularList';
-import { RegularDummy } from '@/constants/regular';
 import { useState, useEffect } from 'react';
 import { getPostList } from '@/apis/getPostList';
 import { AxiosError } from 'axios';
@@ -48,7 +45,6 @@ const RegularPage = () => {
         <_RegularWrapper>
           <_TopWrapper>
             <_Title>등록한 규칙적인 기록들 📝</_Title>
-            <Button color="main01">주기 작성 추가</Button>
           </_TopWrapper>
           <_ListWrapper>
             {data.map((item: ListType) => {
@@ -84,6 +80,7 @@ const _TopWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 30px;
 `;
 
 const _InnerWrapper = styled.div`
