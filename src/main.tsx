@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { useEffect } from 'react';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,6 +18,19 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
+  useEffect(() => {
+    const path: string = window.location.pathname;
+
+    if (path !== '/') {
+      const accessToken: string | null = localStorage.getItem('accessToken');
+
+      if (!accessToken) {
+        alert('로그인이 필요합니다');
+        window.location.href = '/';
+      }
+    }
+  }, []);
+  
   return (
     <StyleProvider>
       <QueryClientProvider client={queryClient}>
