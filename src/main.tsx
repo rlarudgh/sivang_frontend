@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useEffect } from 'react';
+import { getCookie } from './utils/cookie';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,7 +23,7 @@ const App = () => {
     const path: string = window.location.pathname;
 
     if (path !== '/') {
-      const accessToken: string | null = localStorage.getItem('accessToken');
+      const accessToken: string | null = getCookie('accessToken');
 
       if (!accessToken) {
         alert('로그인이 필요합니다');
@@ -30,7 +31,7 @@ const App = () => {
       }
     }
   }, []);
-  
+
   return (
     <StyleProvider>
       <QueryClientProvider client={queryClient}>
