@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { MainBackground } from '@/assets';
 import Button from '@/components/common/button';
 import HistoryList from '@/components/historyList';
-import { TransactionDummy } from '@/constants/purchase';
 import { useRecoilValue } from 'recoil';
 import { modalState } from '@/utils/atom';
 import DetailModal from '@/components/modal/Detail';
