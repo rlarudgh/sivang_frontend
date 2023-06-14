@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, ChangeEvent, KeyboardEvent } from 'react';
 import styled from 'styled-components';
 import { Logo, LoginImage } from '@/assets';
 import { LoginType } from '@/types/login';
@@ -10,7 +10,7 @@ import { useRecoilValue } from 'recoil';
 import { modalState } from '@/utils/atom';
 import { Login } from '@/apis/login';
 import { customToast } from '@/utils/toast';
-import { setCookie } from '@/utils/cookie';
+import { getCookie, setCookie } from '@/utils/cookie';
 
 interface DataType {
   access_token: string;
@@ -25,7 +25,7 @@ const LoginPage = () => {
   const { openModal } = useModal();
   const modal = useRecoilValue(modalState);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInformation({ ...information, [name]: value });
   };
@@ -35,14 +35,29 @@ const LoginPage = () => {
       .then(({ data }: any) => {
         const { access_token, expiredIn }: DataType = data;
         const expires: Date = new Date(Date.now() + 1);
-        console.log(expires.getTime());
         setCookie('accessToken', access_token, expires);
         window.location.href = '/main';
       })
       .catch(err => {
         customToast(err.response.data.message, 'error');
+        console.error(err);
       });
   };
+
+  const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && information) {
+      onClick();
+    }
+  };
+
+  useEffect(() => {
+    const accessToken: string | null = getCookie('accessToken');
+
+    if (accessToken) {
+      window.location.href = '/main';
+      return;
+    }
+  }, []);
 
   return (
     <_Wrapper>
@@ -79,6 +94,7 @@ const LoginPage = () => {
             value={information.password}
             name="password"
             text="비밀번호"
+            onKeyPress={onKeyPress}
           />
           <_SignUpText>
             아직 계정이 없으신가요?
