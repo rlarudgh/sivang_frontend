@@ -16,5 +16,5 @@ yarn
 yarn dev
 ```
 
-### using skills
+### Using Skills
 react, vite, typescript, yarn, styled-components, axios, recoil
