@@ -3,12 +3,25 @@ import { useEffect, useState } from 'react';
 import { getProfile } from '@/apis/mypage';
 import { AxiosError } from 'axios';
 
+interface DataType {
+  amount: number;
+  auto: boolean;
+  createAt: string;
+  description: string;
+  id: number;
+  regularWeek: number;
+  title: string;
+  type: boolean;
+  userId: number;
+}
+
 interface InformationType {
   id: number;
   email: string;
   name: string;
   createAt: string;
-  moneys: [];
+  moneys: DataType[];
+  length: number;
 }
 
 const MyPageNav = () => {
@@ -18,6 +31,7 @@ const MyPageNav = () => {
     name: '기본',
     createAt: '기본',
     moneys: [],
+    length: 0,
   });
 
   const setCreateAt = (date: string) => {
@@ -25,12 +39,19 @@ const MyPageNav = () => {
     day = day.substring(0, 2);
     setInformation(prev => ({ ...prev, createAt: `${year}.${month}.${day}` }));
   };
-  
+
+  const setMoneyLength = (data: DataType[]) => {
+    const length = data.filter((item: DataType) => item.regularWeek !== 0).length;
+    setInformation(prev => ({ ...prev, length }));
+  };
+
   useEffect(() => {
     getProfile()
       .then(({ data }) => {
-        setInformation(prev => ({ ...prev, ...data.profile }));
-        setCreateAt(data.profile.createAt);
+        const { profile } = data;
+        setInformation(prev => ({ ...prev, ...profile }));
+        setCreateAt(profile.createAt);
+        setMoneyLength(profile.moneys);
       })
       .catch((err: AxiosError) => console.error(err));
   }, []);
@@ -50,7 +71,7 @@ const MyPageNav = () => {
             </_SubInformation>
             <_SubInformation>
               <_SubTitle>자동 등록 수</_SubTitle>
-              <_SubInformationText>{information.moneys.length}개</_SubInformationText>
+              <_SubInformationText>{information.length}개</_SubInformationText>
             </_SubInformation>
           </_SubWrapper>
         </_InformationNav>
