@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "vercel": "vercel dev",
     "deploy": "vercel deploy",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint-front": "lint-staged"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
@@ -37,5 +38,11 @@
     "typescript": "^4.9.3",
     "vercel": "^30.2.2",
     "vite": "^4.1.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --config ./.prettierrc --write -u"
+    ]
   }
 }
