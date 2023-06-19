@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useModal } from '@/hooks/useModal';
-import { Minus } from '@/assets';
-import { PaymentDummy } from '@/constants/payment';
+import { Minus, Plus } from '@/assets';
 import { getCookie } from '@/utils/cookie';
 import { getPost } from '@/apis/getPost';
 import { useEffect, useState } from 'react';
@@ -34,7 +33,9 @@ const CheckItem = () => {
   });
 
   useEffect(() => {
-    getPost(getCookie('id'))
+    const id: string = getCookie('id');
+    
+    getPost(parseInt(id, 10))
       .then(res => {
         setPayment(res.data.moneyPost);
       })
@@ -48,10 +49,10 @@ const CheckItem = () => {
     <_Wrapper>
       <div>
         <_InnerWrapper>
-          <_Image src={Minus} alt="type" onClick={closeModal} />
-          <_Title>{payment.title}</_Title>
+          <_Image src={payment.type ? Plus : Minus} alt="type" onClick={closeModal} />
+          <_Title type={payment.type}>{payment.title}</_Title>
         </_InnerWrapper>
-        <_Bar />
+        <_Bar type={payment.type} />
       </div>
       <div>
         <_InnerTitle>사유</_InnerTitle>
@@ -86,15 +87,15 @@ const _Image = styled.img`
   cursor: pointer;
 `;
 
-const _Title = styled.span`
+const _Title = styled.span<{ type: boolean }>`
   ${({ theme }) => theme.font.body3};
-  color: ${({ theme }) => theme.color.main01};
+  color: ${({ theme, type }) => (type ? theme.color.focus : theme.color.main01)};
 `;
 
-const _Bar = styled.hr`
-  width: 250px;
+const _Bar = styled.hr<{ type: boolean }>`
+  width: 400px;
   height: 1px;
-  border: 1px solid ${({ theme }) => theme.color.main01};
+  border: 1px solid ${({ theme, type }) => (type ? theme.color.focus : theme.color.main01)};
   margin-top: 20px;
 `;
 

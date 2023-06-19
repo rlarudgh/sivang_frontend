@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useModal } from '../../hooks/useModal';
-import { Minus } from '../../assets';
+import { Minus, Plus } from '../../assets';
 import { PaymentType } from '../../types/modal';
 import { useState, ChangeEvent, useEffect } from 'react';
 import TextArea from '../common/textarea';
@@ -9,6 +9,7 @@ import { getCookie } from '@/utils/cookie';
 import { modifyMoney } from '@/apis/modifyMoney';
 import { AxiosError } from 'axios';
 import { customToast } from '@/utils/toast';
+import { getPost } from '@/apis/getPost';
 
 interface PropsType {
   setReload: (reload: number) => void;
@@ -63,10 +64,10 @@ const ModifyItem = ({ setReload }: PropsType) => {
     <_Wrapper>
       <div>
         <_InnerWrapper>
-          <_Image src={Minus} alt="type" onClick={closeModal} />
+          <_Image src={radio === '입금' ? Plus : Minus} alt="type" onClick={closeModal} />
           <_Input placeholder="제목을 입력하세요" value={information.title} name="title" onChange={onChange} />
         </_InnerWrapper>
-        <_Bar />
+        <_Bar check={radio} />
       </div>
       <div>
         <TextArea
@@ -106,7 +107,7 @@ const ModifyItem = ({ setReload }: PropsType) => {
           </_TypeItems>
         ))}
       </_TypeWrapper>
-      <Button onClick={onClick} color="main01">
+      <Button onClick={onClick} color={radio === '입금' ? 'focus' : 'main01'}>
         수정
       </Button>
     </_Wrapper>
@@ -134,10 +135,10 @@ const _Image = styled.img`
   cursor: pointer;
 `;
 
-const _Bar = styled.hr`
+const _Bar = styled.hr<{ check: string }>`
   width: 250px;
   height: 1px;
-  border: 1px solid ${({ theme }) => theme.color.main01};
+  border: 1px solid ${({ theme, check }) => (check === '입금' ? theme.color.focus : theme.color.main01)};
   margin-top: 20px;
 `;
 

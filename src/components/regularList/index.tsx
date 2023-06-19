@@ -24,7 +24,7 @@ const RegularList = ({ data }: { data: ListType }) => {
         <_Title>{data.title}</_Title>
       </_Nav>
       <_Nav>
-        <_Text type={data.type}>{data.regularWeek}일 주기</_Text>
+        <_Text type={data.type}>{data.regularWeek}주</_Text>
         <_Text type={data.type}>{data.amount}원</_Text>
       </_Nav>
     </_Wrapper>
