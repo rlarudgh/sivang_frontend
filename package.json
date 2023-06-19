@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "vercel": "vercel dev",
-    "deploy": "vercel deploy"
+    "deploy": "vercel deploy",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
@@ -30,6 +31,8 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "^8.36.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.8.6",
     "typescript": "^4.9.3",
     "vercel": "^30.2.2",
