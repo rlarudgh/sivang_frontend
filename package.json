@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vercel": "vercel dev",
+    "deploy": "vercel deploy"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
@@ -30,6 +32,7 @@
     "eslint": "^8.36.0",
     "prettier": "^2.8.6",
     "typescript": "^4.9.3",
+    "vercel": "^30.2.2",
     "vite": "^4.1.5"
   }
 }
