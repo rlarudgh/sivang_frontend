@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/test",
+      "destination": "http://myapi.com/api/test"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
