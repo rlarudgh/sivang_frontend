@@ -6,6 +6,13 @@
 
 ## Project Setting
 
+Clone this repository.
+
+```shell
+git clone https://github.com/kimkh05/sivang_frontend.git [dir]
+```
+
+## Install node_modules
 ```shell
 yarn
 ```
@@ -17,4 +24,4 @@ yarn dev
 ```
 
 ### Using Skills
-react, vite, typescript, yarn, styled-components, axios, recoil
+React, Vite, Typescript, Yarn, Styled-Components, Axios, Recoil
